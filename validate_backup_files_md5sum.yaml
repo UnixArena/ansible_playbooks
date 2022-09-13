@@ -1,0 +1,15 @@
+hosts: localhost 
+gather_facts: yes
+
+tasks:
+  - name: Backup the config files before editing it
+    shell: |  
+       cp /etc/hosts /etc/hosts.bak.{{ansible_date_time.date}}
+       cp /etc/netmasks /etc/netmasks.bak.{{ansible_date_time.date}}
+
+  - name: Valdiate the backup files using md5 checksum 
+    shell: md5sum "{{ item.orig }}" "{{ item.backup }}"
+    with_items:
+      - { orig: '/etc/hosts', backup: '/etc/hosts.bak."{{ansible_date_time.date}}"'}
+      - { orig: '/etc/netmasks', backup: '/etc/netmasks.bak."{{ansible_date_time.date}}"'}
+    register: md5checksum
