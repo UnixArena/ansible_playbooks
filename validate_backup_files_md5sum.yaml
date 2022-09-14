@@ -17,5 +17,5 @@
     register: md5checksum
 
   - debug: 
-      msg: Backup Successful 
+      msg: {{ md5checksum.stdout_lines }}
     when: md5checksum.changed
