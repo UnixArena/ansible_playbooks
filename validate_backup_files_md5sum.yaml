@@ -9,7 +9,7 @@
        cp /etc/nsswitch.conf /var/tmp/nsswitch.conf.bak.{{ansible_date_time.date}}
 
   - name: Valdiate the backup files using md5 checksum 
-    shell: md5sum "{{ item.orig }}" "{{ item.backup }}"
+    command: md5sum "{{ item.orig }}" "{{ item.backup }}"
     with_items:
       - { orig: '/etc/hosts', backup: '/var/tmp/hosts.bak.{{ansible_date_time.date}}'}
       - { orig: '/etc/nsswitch.conf', backup: '/var/tmp/nsswitch.conf.bak.{{ansible_date_time.date}}'}
