@@ -22,5 +22,4 @@
 
   - fail: 
       msg: Backup files integrity is failed
-    when: "{{ item.stdout }} in  MD5CHECK_FAIL"
-    with_items: " {{ MD5.results }} "
+    when: " {{ MD5.results | map(attribute='stdout') | join('\n') }}  in  MD5CHECK_FAIL "
