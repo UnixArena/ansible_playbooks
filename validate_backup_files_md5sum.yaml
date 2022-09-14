@@ -1,7 +1,9 @@
 ---
 - hosts: localhost 
   gather_facts: yes
-
+  var: 
+    MD5CHECK
+      - 2
   tasks:
   - name: Backup the config files before editing it
     shell: |  
@@ -9,7 +11,7 @@
        cp /etc/nsswitch.conf /var/tmp/nsswitch.conf.bak.{{ansible_date_time.date}}
 
   - name: Valdiate the backup files using md5 checksum 
-    command: md5sum "{{ item.orig }}" "{{ item.backup }}" 
+    command: md5sum "{{ item.orig }}" "{{ item.backup }}" | unique | wc -l 
     with_items:
       - { orig: '/etc/hosts', backup: '/var/tmp/hosts.bak.{{ansible_date_time.date}}'}
       - { orig: '/etc/nsswitch.conf', backup: '/var/tmp/nsswitch.conf.bak.{{ansible_date_time.date}}'}
@@ -17,5 +19,5 @@
     register: MD5
 
   - debug: 
-      msg: "{{ item.stdout_lines | length }}"
-    with_items: " {{ MD5.results }} "
+      msg: Backup files integrity is failed 
+    with_items: " {{ MD5.results }} in  MDCHECK "
