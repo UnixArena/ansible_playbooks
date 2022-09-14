@@ -5,8 +5,6 @@
   vars: 
     MD5CHECK_FAIL:
       - 2
-    MD5CHECK_SUCCESS:
-      - 1
       
   tasks:
   - name: Backup the config files before editing it
@@ -24,4 +22,4 @@
 
   - fail: 
       msg: Backup files integrity is failed 
-    with_items: " {{ MD5.results }} in  MD5CHECK_FAIL "
+    with_items: " {{ MD5.results.stdout }} in  MD5CHECK_FAIL "
