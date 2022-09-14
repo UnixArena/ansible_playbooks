@@ -14,3 +14,7 @@
       - { orig: '/etc/hosts', backup: '/var/tmp/hosts.bak.{{ansible_date_time.date}}'}
       - { orig: '/etc/nsswitch.conf', backup: '/var/tmp/nsswitch.conf.bak.{{ansible_date_time.date}}'}
     register: md5checksum
+
+  - debug: Print Message 
+      msg: 
+    when: md5checksum.changed
