@@ -17,5 +17,4 @@
     register: md5checksum
 
   - debug: 
-      msg: "{{ md5checksum.stdout_lines }}"
-    when: md5checksum.changed
+      var: md5checksum.stdout_lines
