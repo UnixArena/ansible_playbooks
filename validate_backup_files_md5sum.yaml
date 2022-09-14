@@ -14,7 +14,7 @@
       - { orig: '/etc/hosts', backup: '/var/tmp/hosts.bak.{{ansible_date_time.date}}'}
       - { orig: '/etc/nsswitch.conf', backup: '/var/tmp/nsswitch.conf.bak.{{ansible_date_time.date}}'}
       - { orig: '/etc/nsswitch.conf', backup: '/var/tmp/hosts.bak.{{ansible_date_time.date}}'}
-    register: md5checksum
+    register: MD5
 
   - debug: 
-      var: md5checksum.stdout
+      var: MD5.stdout
