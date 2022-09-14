@@ -3,8 +3,10 @@
   gather_facts: yes
   
   vars: 
-    MD5CHECK:
+    MD5CHECK_FAIL:
       - 2
+    MD5CHECK_SUCCESS:
+      - 1
       
   tasks:
   - name: Backup the config files before editing it
@@ -17,9 +19,12 @@
     with_items:
       - { orig: '/etc/hosts', backup: '/var/tmp/hosts.bak.{{ansible_date_time.date}}'}
       - { orig: '/etc/nsswitch.conf', backup: '/var/tmp/nsswitch.conf.bak.{{ansible_date_time.date}}'}
-      - { orig: '/etc/nsswitch.conf', backup: '/var/tmp/hosts.bak.{{ansible_date_time.date}}'}
     register: MD5
 
   - debug: 
       msg: Backup files integrity is failed 
-    with_items: " {{ MD5.results }} in  MDCHECK "
+    with_items: " {{ MD5.results }} in  MD5CHECK_FAIL "
+ 
+  - debug: 
+      msg: Backup files integrity is success 
+    with_items: " {{ MD5.results }} in  MD5CHECK_SUCCESS "
