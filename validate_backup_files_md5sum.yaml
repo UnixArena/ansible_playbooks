@@ -17,4 +17,5 @@
     register: MD5
 
   - debug: 
-      var: MD5.stdout
+      msg: "{{ item.stdout_lines }}"
+    with_items: " {{ MD5.results }} "
