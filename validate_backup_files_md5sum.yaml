@@ -1,9 +1,11 @@
 ---
 - hosts: localhost 
   gather_facts: yes
-  var: 
+  
+  vars: 
     MD5CHECK
       - 2
+      
   tasks:
   - name: Backup the config files before editing it
     shell: |  
