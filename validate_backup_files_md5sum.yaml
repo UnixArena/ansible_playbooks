@@ -17,4 +17,4 @@
     register: md5checksum
 
   - debug: 
-      var: md5checksum.stdout_lines
+      var: md5checksum.stdout
