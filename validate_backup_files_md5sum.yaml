@@ -24,7 +24,12 @@
   - debug: 
       msg: Backup files integrity is failed 
     with_items: " {{ MD5.results }} in  MD5CHECK_FAIL "
- 
+    register: FAIL_MSG
+    
+  - fail:
+      msg: Job is failed due to checksum error
+    when: FAIL_MSG is changed 
+    
   - debug: 
       msg: Backup files integrity is success 
     with_items: " {{ MD5.results }} in  MD5CHECK_SUCCESS "
