@@ -3,7 +3,7 @@
   gather_facts: yes
   
   vars: 
-    MD5CHECK
+    MD5CHECK:
       - 2
       
   tasks:
