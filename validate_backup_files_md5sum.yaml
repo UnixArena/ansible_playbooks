@@ -21,5 +21,6 @@
     register: MD5
 
   - fail: 
-      msg: Backup files integrity is failed 
-    with_items: " {{ MD5.results.stdout }} in  MD5CHECK_FAIL "
+      msg: Backup files integrity is failed
+    when: "{{ item.stdout }} in  MD5CHECK_FAIL"
+    with_items: " {{ MD5.results }} "
