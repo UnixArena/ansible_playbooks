@@ -22,4 +22,4 @@
 
   - fail: 
       msg: Backup files integrity is failed
-    when: " {{ MD5.results | map(attribute='stdout') | join('\n') }}  in  MD5CHECK_FAIL "
+    when: " {{ MD5.results map(attribute='stdout_lines') | list }}  in  MD5CHECK_FAIL "
